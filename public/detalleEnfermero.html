@@ -155,49 +155,50 @@
 
     <!-- Main content-->
     <section class="content">
-            <div class="container-fluid">
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        
-                        <hr>
-                    </div>
-                </div>
-
-                
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table id="tablaEnfermeros" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Email</th>
-                                                <th>DNI</th>
-                                                <th>Name</th>
-                                                <th>Last Name 1</th>
-                                                <th>Last Name 2</th>
-                                                <th>Phone</th>
-                                                <th>Location</th>
-                                                <th>Age</th>
-                                                <th>Price</th>
-                                                <th>Experience</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+        <div class="container" style="padding-top: 20px;">
+            <h2>Detalle del Usuario</h2>
+            <div id="detallesUsuario" class="well">
+                <!-- Los detalles del usuario se insertarán aquí -->
             </div>
+        </div>
+    
+        <script>
+            $(document).ready(function() {
+                // Datos inventados del usuario
+                var usuario = {
+                    nombre: "Juan Pérez",
+                    edad: 34,
+                    especialidad: "Enfermería General",
+                    experiencia: "10 años",
+                    email: "juan.perez@example.com"
+                };
+    
+                // Función para mostrar los detalles del usuario
+                function mostrarDetallesUsuario(usuario) {
+                    var detallesHtml = `
+                        <p><strong>Nombre:</strong> ${usuario.nombre}</p>
+                        <p><strong>Edad:</strong> ${usuario.edad}</p>
+                        <p><strong>Especialidad:</strong> ${usuario.especialidad}</p>
+                        <p><strong>Experiencia:</strong> ${usuario.experiencia}</p>
+                        <p><strong>Email:</strong> ${usuario.email}</p>
+                    `;
+                    $('#detallesUsuario').html(detallesHtml);
+                }
+    
+                // Llamada a la función para mostrar los detalles
+                mostrarDetallesUsuario(usuario);
+            });
+            
+        </script>
+        <div style="text-align: center; padding-top: 20px;">
+            <button id="btnValidar" class="btn btn-success" style="margin-right: 10px;">Validar</button>
+            <button id="btnRestringir" class="btn btn-danger">Restringir</button>
+        </div>
+        <script>
+            document.getElementById('btnValidar').onclick = function() {
+                window.location.href = 'paginaValidacion.html';
+            };
+        </script>
     </section>
     <!-- End main content-->
 

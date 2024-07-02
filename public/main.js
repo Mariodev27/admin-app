@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('http://192.168.1.8:3000/api/users/nurses')
+    fetch('http://192.168.18.2:3000/api/users/all')
         .then(response => response.json())
         .then(data => {
             const table = document.querySelector('#tablaEnfermeros tbody');
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 experienceCell.textContent = nurse.experience;
 
                 const viewButton = document.createElement('a');
-                viewButton.href = '#';
+                viewButton.href = `detalleEnfermero.html?id=${nurse.id}`; // Modificado para redirigir a la página con el ID del enfermero
                 viewButton.textContent = 'Ver';
                 viewButton.classList.add('btn', 'btn-default', 'btn-xs');
                 actionCell.appendChild(viewButton);
@@ -46,24 +46,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 deleteButton.textContent = 'Eliminar';
                 deleteButton.classList.add('btn', 'btn-danger', 'btn-xs');
                 deleteButton.addEventListener('click', () => {
-                // Mostrar mensaje de confirmación
-                const isConfirmed = confirm(`¿Estás seguro de que deseas eliminar el registro con ID ${nurse.id}?`);
-                if (isConfirmed) {
-                    // El usuario confirmó la eliminación
-                    fetch(`/api/users/${nurse.id}`, { method: 'DELETE' })
-                    .then(response => response.json()) // Asumiendo que el servidor responde con JSON
-                    .then(data => {
-                        if (data.success) { // Asumiendo que el servidor responde con un campo 'success'
-                            console.log(`Registro con ID ${nurse.id} eliminado`);
-                            alert(`Registro con ID ${nurse.id} eliminado correctamente.`);
-                            // Aquí puedes eliminar la fila de la tabla o recargar la tabla/partes de la página para reflejar la eliminación
-                        } else {
-                            console.error('Error al eliminar el registro:', data.message); // Asumiendo que el servidor responde con un campo 'message'
-                            alert('Hubo un error al intentar eliminar el registro: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
+                    // Mostrar mensaje de confirmación
+                    const isConfirmed = confirm(`¿Estás seguro de que deseas eliminar el registro con ID ${nurse.id}?`);
+                    if (isConfirmed) {
+                        // El usuario confirmó la eliminación
+                        fetch(`/api/users/${nurse.id}`, { method: 'DELETE' })
+                        .then(response => response.json()) // Asumiendo que el servidor responde con JSON
+                        .then(data => {
+                            if (data.success) { // Asumiendo que el servidor responde con un campo 'success'
+                                console.log(`Registro con ID ${nurse.id} eliminado`);
+                                alert(`Registro con ID ${nurse.id} eliminado correctamente.`);
+                                // Aquí puedes eliminar la fila de la tabla o recargar la tabla/partes de la página para reflejar la eliminación
+                            } else {
+                                console.error('Error al eliminar el registro:', data.message); // Asumiendo que el servidor responde con un campo 'message'
+                                alert('Hubo un error al intentar eliminar el registro: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
                         alert('Hubo un error al intentar eliminar el registro.');
                     });
                 }
